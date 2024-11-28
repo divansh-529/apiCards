@@ -1,0 +1,259 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive API Cards</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        #cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            border: 1px solid #ccc;
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            background-color: #fff;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                padding: 12px;
+            }
+
+            .card h3 {
+                font-size: 16px;
+            }
+
+            .card p {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .card {
+                padding: 10px;
+            }
+
+            .card h3 {
+                font-size: 14px;
+            }
+
+            .card p {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="cards-container"></div>
+
+    <script>
+        const API_URL = 'https://randomuser.me/api/?results=30'; // Fetch 30 random users
+        const PROFESSIONS = [
+            "Software Engineer", "Doctor", "Teacher", "Artist",
+            "Architect", "Designer", "Photographer", "Scientist",
+            "Writer", "Chef", "Entrepreneur", "Lawyer"
+        ]; // Sample professions
+
+        const CARDS_CONTAINER = document.getElementById('cards-container'); // Target container
+
+        // Fetch data and create cards
+        const createCards = async () => {
+            try {
+                const response = await fetch(API_URL);
+                const { results: users } = await response.json();
+
+                users.forEach(user => {
+                    const profession = PROFESSIONS[Math.floor(Math.random() * PROFESSIONS.length)]; // Assign random profession
+                    CARDS_CONTAINER.innerHTML += `
+                        <div class="card">
+                            <img src="${user.picture.large}" alt="${user.name.first}" />
+                            <h3>${user.name.first} ${user.name.last}</h3>
+                            <p>Age: ${user.dob.age}</p>
+                            <p>Profession: ${profession}</p>
+                            <p>Location: ${user.location.city}, ${user.location.country}</p>
+                        </div>
+                    `;
+                });
+            } catch (error) {
+                CARDS_CONTAINER.innerHTML = '<p>Failed to load cards. Please try again later.</p>';
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        createCards(); // Initialize card creation
+    </script>
+</body>
+
+</html> -->
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script src="/script.js"></script>
+
+</body>
+
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Profile Cards</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Cards Grid Layout */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        /* Individual Card */
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 15px;
+        }
+
+        .card-content h2 {
+            font-size: 18px;
+            margin: 0;
+            color: #333;
+        }
+
+        .card-content p {
+            margin: 5px 0;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Profile Cards</h1>
+        <div class="cards" id="cards-container">
+            <!-- Cards will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        // Fetch data from the dummy API
+        const API_URL = "https://jsonplaceholder.typicode.com/users";
+
+        const container = document.getElementById("cards-container");
+
+        fetch(API_URL)
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(user => {
+                    const card = document.createElement("div");
+                    card.classList.add("card");
+                    card.innerHTML = `
+            <img src="https://via.placeholder.com/300x150?text=Profile+Image" alt="${user.name}">
+            <div class="card-content">
+              <h2>${user.name}</h2>
+              <p>Email: ${user.email}</p>
+              <p>Location: ${user.address.city}, ${user.address.street}</p>
+            </div>
+          `;
+                    container.appendChild(card);
+                });
+            })
+            .catch(error => console.error("Error fetching data:", error));
+    </script>
+</body>
+
+</html>
